@@ -1,37 +1,72 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> 
+            Matrice tester
+        </title>
+        <meta charset="utf-8">
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            tex2jax: {
+              inlineMath: [["$","$"],["\\(","\\)"]]
+            }
+          });
+        </script>
+        <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+        
+        <script src="generator.js"></script>
 
-You can use the [editor on GitHub](https://github.com/SpencerWBarnes/Linguistic-Feature-Matrix-Generator/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    </head>
+    <body>
+      <div class="container">
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        <textarea id="input" class="col-12" onkeyup="keyUpEvent(event, this.value)"> </textarea> 
 
-### Markdown
+        <script type="math/tex; mode=display" id="equation">
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        </script>
 
-```markdown
-Syntax highlighted code block
+      </div>
 
-# Header 1
-## Header 2
-### Header 3
+      <script>
+        let equation = sessionStorage.getItem("equation");
+        document.getElementById("equation").innerText = equation
+      </script>
 
-- Bulleted
-- List
+      <script>
+        let input = sessionStorage.getItem("input");
+        document.getElementById("input").innerText = input;
+      </script>
 
-1. Numbered
-2. List
+      <script>
+        //
+        //  Use a closure to hide the local variables from the
+        //  global namespace
+        //
+        (function () {
+          var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
+          var math = null;                // the element jax for the math output.
+      
+          //
+          //  Get the element jax when MathJax has produced it.
+          //
+          QUEUE.Push(function () {
+            math = MathJax.Hub.getAllJax("equation")[0];
+          });
+      
+          //
+          //  The onchange event handler that typesets the
+          //  math entered by the user
+          //
+          window.UpdateMath = function (TeX) {
+            QUEUE.Push(["Text",math,"\\displaystyle{"+TeX+"}"]);
+          }
+        })();
+      </script>
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SpencerWBarnes/Linguistic-Feature-Matrix-Generator/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    </body>
+</html>
