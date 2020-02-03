@@ -2,6 +2,7 @@ function keyUpEvent(equation)
 {
   let output = "";
 
+  autosize(document.getElementById("input"));
   equation = inputIntellisense(equation);
 
   sessionStorage.setItem("input", equation);

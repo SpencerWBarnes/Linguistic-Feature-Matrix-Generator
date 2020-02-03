@@ -15,15 +15,22 @@
         <script type="text/javascript"
           src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
+        <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
         
         <script src="generator.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     </head>
     <body>
-      <textarea id="input" onkeyup="keyUpEvent(this.value)"> </textarea> 
+      <div class="container">
 
-      <script type="math/tex; mode=display" id="equation">
+        <textarea id="input" class="col-12" onkeyup="keyUpEvent(this.value)"> </textarea> 
 
-      </script>
+        <script type="math/tex; mode=display" id="equation">
+
+        </script>
+
+      </div>
 
       <script>
         let equation = sessionStorage.getItem("equation");
