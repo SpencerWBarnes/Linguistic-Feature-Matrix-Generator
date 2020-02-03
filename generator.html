@@ -17,11 +17,22 @@
     <body>
       <div class="container">
 
-        <textarea id="input" class="col-12" onkeyup="keyUpEvent(event, this.value)"> </textarea> 
+        <textarea id="input" placeholder="Type here" class="col-12" onkeyup="keyUpEvent(event, this.value)"></textarea>
+      
+        <div class="card text-center">
+          <div class="card-body">
+            <p class="card-text">
+              <code>[</code> and <code>]</code> to start or end a matrix bracket <br>
+              <code>,</code> between words in a row <br>
+              <kbd>Enter</kbd> or <code>;</code> to go to go down a line <br>
+              <code>not</code> followed by a space to place a &not symbol <br>
+              <code>phi</code> followed by a space to place a &phi; symbol <br>
+            </p>
+            <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
+          </div>
+        </div>
 
-        <script type="math/tex; mode=display" id="equation">
-
-        </script>
+        <script type="math/tex; mode=display" id="equation"></script>
 
       </div>
 
