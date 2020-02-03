@@ -21,23 +21,13 @@
     <body>
       <textarea id="input" onkeyup="keyUpEvent(this.value)"> </textarea> 
 
-      <div>
-        <div>
-          <div id="equationHolder">
-            <div id="output">
+      <script type="math/tex; mode=display" id="equation">
 
-            </div>
-          </div>
-        </div>
-      </div>
+      </script>
 
       <script>
         let equation = sessionStorage.getItem("equation");
-        let newElement = document.createElement("script");
-        newElement.type = "math/tex; mode=display";
-        newElement.id = "equation";
-        newElement.innerText = equation;
-        document.getElementById("output").appendChild(newElement);
+        document.getElementById("equation").innerText = equation
       </script>
 
       <script>
