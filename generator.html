@@ -5,13 +5,6 @@
             Matrice tester
         </title>
         <meta charset="utf-8">
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-            tex2jax: {
-              inlineMath: [["$","$"],["\\(","\\)"]]
-            }
-          });
-        </script>
         <script type="text/javascript"
           src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
@@ -39,7 +32,7 @@
 
       <script>
         let input = sessionStorage.getItem("input");
-        document.getElementById("input").innerText = input;
+        document.getElementById("input").value = input;
       </script>
 
       <script>
