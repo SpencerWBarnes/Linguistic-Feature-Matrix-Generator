@@ -2,6 +2,8 @@ function keyUpEvent(equation)
 {
   let output = "";
 
+  equation = inputIntellisense(equation);
+
   sessionStorage.setItem("input", equation);
 
   let separated = splitEquation(equation);
@@ -12,8 +14,36 @@ function keyUpEvent(equation)
     });
   
   sessionStorage.setItem("equation", output);
-  // document.getElementById("equation").innerHTML = output;
   UpdateMath(output);
+}
+
+function inputIntellisense(equation)
+{
+  let input = document.getElementById("input");
+  let cursorPosition = input.selectionEnd;
+  console.log(cursorPosition);
+
+  let bracketDepth = 0;
+  let leftOfCursor = equation.substring(0, cursorPosition);
+  let rightOfCursor = equation.substring(cursorPosition);
+  bracketDepth = (leftOfCursor.match(/\[/g) || []).length - (leftOfCursor.match(/]/g) || []).length;
+
+  if ((equation.match(/\[/g) || []).length > (equation.match(/]/g) || []).length)
+  {
+    rightOfCursor = ']'+rightOfCursor;
+  }
+  if (leftOfCursor.slice(-1) == '\n' && bracketDepth > 1)
+  {
+    for (i = 1; i < bracketDepth; i++)
+    {
+      leftOfCursor += '\t';
+      cursorPosition++;
+    }
+  }
+  
+  input.value = leftOfCursor + rightOfCursor;
+  input.selectionEnd = cursorPosition;
+  return leftOfCursor + rightOfCursor;
 }
 
 function splitEquation(equation)
