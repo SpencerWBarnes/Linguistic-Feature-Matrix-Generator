@@ -5,20 +5,37 @@
             Matrice tester
         </title>
         <meta charset="utf-8">
-        <script type="text/javascript"
-          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            tex2jax: {
+              inlineMath: [["$","$"],["\\(","\\)"]]
+            }
+          });
         </script>
+        <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
         <script src="generator.js"></script>
     </head>
     <body>
       <textarea id="input" onkeyup="keyUpEvent(this.value)"> </textarea> 
 
-      <div id="output">
+      <div>
+        <div>
+          <div id="equationHolder">
+            <div id="output">
+
+            </div>
+          </div>
+        </div>
       </div>
+
       <script>
         let equation = sessionStorage.getItem("equation");
         let newElement = document.createElement("script");
         newElement.type = "math/tex; mode=display";
+        newElement.id = "equation";
         newElement.innerText = equation;
         document.getElementById("output").appendChild(newElement);
       </script>
@@ -27,5 +44,32 @@
         let input = sessionStorage.getItem("input");
         document.getElementById("input").innerText = input;
       </script>
+
+      <script>
+        //
+        //  Use a closure to hide the local variables from the
+        //  global namespace
+        //
+        (function () {
+          var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
+          var math = null;                // the element jax for the math output.
+      
+          //
+          //  Get the element jax when MathJax has produced it.
+          //
+          QUEUE.Push(function () {
+            math = MathJax.Hub.getAllJax("equation")[0];
+          });
+      
+          //
+          //  The onchange event handler that typesets the
+          //  math entered by the user
+          //
+          window.UpdateMath = function (TeX) {
+            QUEUE.Push(["Text",math,"\\displaystyle{"+TeX+"}"]);
+          }
+        })();
+      </script>
+
     </body>
 </html>

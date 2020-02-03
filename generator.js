@@ -12,6 +12,8 @@ function keyUpEvent(equation)
     });
   
   sessionStorage.setItem("equation", output);
+  // document.getElementById("equation").innerHTML = output;
+  UpdateMath(output);
 }
 
 function splitEquation(equation)
