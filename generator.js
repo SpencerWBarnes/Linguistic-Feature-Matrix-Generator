@@ -1,9 +1,9 @@
-function keyUpEvent(equation)
+function keyUpEvent(event, equation)
 {
   let output = "";
 
   autosize(document.getElementById("input"));
-  equation = inputIntellisense(equation);
+  equation = inputIntellisense(event.keyCode, equation);
 
   sessionStorage.setItem("input", equation);
 
@@ -18,7 +18,7 @@ function keyUpEvent(equation)
   UpdateMath(output);
 }
 
-function inputIntellisense(equation)
+function inputIntellisense(keyCode, equation)
 {
   let input = document.getElementById("input");
   let cursorPosition = input.selectionEnd;
@@ -33,7 +33,7 @@ function inputIntellisense(equation)
   {
     rightOfCursor = ']'+rightOfCursor;
   }
-  if (leftOfCursor.slice(-1) == '\n' && bracketDepth > 1)
+  if (keyCode == '13' && bracketDepth > 1)
   {
     for (i = 1; i < bracketDepth; i++)
     {
@@ -79,6 +79,7 @@ function interpretWord(word)
         output += "&";
         break;
       // Separate elements into different rows
+      case ";":
       case "\n":
         output += "\\\\";
         break;
@@ -91,7 +92,7 @@ function interpretWord(word)
       // Add logician's negation
       case "not":
       case "NOT":
-        output += "&not";
+        output += "\\neg";
         break;
       
       // Ignore tabs
