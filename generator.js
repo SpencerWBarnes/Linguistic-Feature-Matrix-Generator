@@ -53,6 +53,12 @@ function inputIntellisense(keyCode, equation)
     rightOfCursor = ')'+rightOfCursor;
   }
 
+  // More opened than closed braces
+  if ((equation.match(/\{/g) || []).length > (equation.match(/\}/g) || []).length)
+  {
+    rightOfCursor = '}'+rightOfCursor;
+  }
+
   // Add tabbing relative to 'depth' on newline
   if (keyCode == '13' && bracketDepth > 1)
   {
@@ -74,7 +80,7 @@ function inputIntellisense(keyCode, equation)
 function splitEquation(equation)
 {
   let output;
-  // Isolate <,> <\n> <[> <]> <(> <)> and <->
+  // Isolate <,> <\n> <[> <]> <(> <)> <{> <}> and <->
   output = equation.replace(/,/g, " , ");
   output = output.replace(/\n/g, " \n ");
   output = output.replace(/\[/g, " [ ");
@@ -82,6 +88,8 @@ function splitEquation(equation)
   output = output.replace(/-/g, " - ");
   output = output.replace(/\(/g, " ( ");
   output = output.replace(/\)/g, " ) ");
+  output = output.replace(/\{/g, " { ");
+  output = output.replace(/\}/g, " } ");
 
   return output.split(" ");
 }
@@ -109,6 +117,15 @@ function interpretWord(word)
       // End subscript
       case ")":
         output += "}";
+        break;
+
+      // Begin braces
+      case "{":
+        output += "\\left\\{";
+        break;
+      // End braces
+      case "}":
+        output += "\\right\\}";
         break;
 
       // Separate elements into different columns
