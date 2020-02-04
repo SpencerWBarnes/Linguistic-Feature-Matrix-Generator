@@ -3,10 +3,10 @@ function keyUpEvent(event, equation)
 {
   let output = "";
 
-  // Adjust input window height if needed
-  autosize(document.getElementById("input"));
   // Apply intellisense, which may add characters to input box
   equation = inputIntellisense(event.keyCode, equation);
+  // Adjust input window height if needed
+  autosize(document.getElementById("input"));
 
   // Store between sessions
   sessionStorage.setItem("input", equation);
@@ -46,6 +46,13 @@ function inputIntellisense(keyCode, equation)
   {
     rightOfCursor = ']'+rightOfCursor;
   }
+
+  // More opened than closed subscript parenthsis
+  if ((equation.match(/\(/g) || []).length > (equation.match(/\)/g) || []).length)
+  {
+    rightOfCursor = ')'+rightOfCursor;
+  }
+
   // Add tabbing relative to 'depth' on newline
   if (keyCode == '13' && bracketDepth > 1)
   {
@@ -67,12 +74,14 @@ function inputIntellisense(keyCode, equation)
 function splitEquation(equation)
 {
   let output;
-  // Isolate <,> <\n> <[> <]> and <->
+  // Isolate <,> <\n> <[> <]> <(> <)> and <->
   output = equation.replace(/,/g, " , ");
   output = output.replace(/\n/g, " \n ");
   output = output.replace(/\[/g, " [ ");
   output = output.replace(/]/g, " ] ");
   output = output.replace(/-/g, " - ");
+  output = output.replace(/\(/g, " ( ");
+  output = output.replace(/\)/g, " ) ");
 
   return output.split(" ");
 }
@@ -91,6 +100,15 @@ function interpretWord(word)
       // End matrix
       case "]":
         output += "\\end{bmatrix}";
+        break;
+
+      // Begin subscript
+      case "(":
+        output += "_{";
+        break;
+      // End subscript
+      case ")":
+        output += "}";
         break;
 
       // Separate elements into different columns

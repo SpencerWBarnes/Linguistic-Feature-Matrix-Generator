@@ -5,21 +5,18 @@
             Feature Matrix Builder
         </title>
         <meta charset="utf-8">
+        <!-- Get MathJax and autosize functionality -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+        
+        <!-- Generator code -->
+        <script src="generator.js"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     </head>
     <body>
       
       <!-- Look into here for help: https://github.com/kbroman/simple_site/tree/gh-pages/pages -->
-
-      <!-- Begin matrix generator code -->
-
-      <!-- Get MathJax and autosize functionality -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-      
-      <!-- Generator code -->
-      <script src="generator.js"></script>
-      <!-- bootstrap -->
-      <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
 
       <div class="container">
 
@@ -54,8 +51,6 @@
         // Adjust input window height if needed
         autosize(document.getElementById("input"));
       </script>
-
-      <!-- End matrix generator code -->
 
     </body>
 </html>
