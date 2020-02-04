@@ -42,31 +42,4 @@
   document.getElementById("input").value = input;
 </script>
 
-<!-- Dynamically reinterpret MathJax code -->
-<script>
-  //
-  //  Use a closure to hide the local variables from the
-  //  global namespace
-  //
-  (function () {
-    var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
-    var math = null;                // the element jax for the math output.
-
-    //
-    //  Get the element jax when MathJax has produced it.
-    //
-    QUEUE.Push(function () {
-      math = MathJax.Hub.getAllJax("equation")[0];
-    });
-
-    //
-    //  The onchange event handler that typesets the
-    //  math entered by the user
-    //
-    window.UpdateMath = function (TeX) {
-      QUEUE.Push(["Text",math,"\\displaystyle{"+TeX+"}"]);
-    }
-  })();
-</script>
-
 <!-- End matrix generator code -->

@@ -22,7 +22,7 @@ function keyUpEvent(event, equation)
   
   // Store between sessions
   sessionStorage.setItem("equation", output);
-  UpdateMath(output);
+  runMathJaxInterpreter(output);
 }
 
 // Add intellisense assistance
@@ -131,4 +131,13 @@ function interpretWord(word)
   // Separate each syntactic unit with a space
   output += " ";
   return output;
+}
+
+// Dynamically reinterpret TeX code
+function runMathJaxInterpreter(equation)
+{
+  // Grab MathJax object
+  let mathJaxObj = MathJax.Hub.getAllJax("equation")[0];
+  // Reflow object with new equation?
+  MathJax.Hub.queue.Push(["Text",mathJaxObj,"\\displaystyle{"+equation+"}"]);
 }
