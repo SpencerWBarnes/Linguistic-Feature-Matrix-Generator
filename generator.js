@@ -1,38 +1,52 @@
+// To be run on each key press
 function keyUpEvent(event, equation)
 {
   let output = "";
 
+  // Adjust input window height if needed
   autosize(document.getElementById("input"));
+  // Apply intellisense, which may add characters to input box
   equation = inputIntellisense(event.keyCode, equation);
 
+  // Store between sessions
   sessionStorage.setItem("input", equation);
 
+  // Split each 'word' so it can be syntactically interpretted
   let separated = splitEquation(equation);
   separated.forEach(word => 
     {
+      // Build up Tex equation
       output += interpretWord(word);
       console.log(output);
     });
   
+  // Store between sessions
   sessionStorage.setItem("equation", output);
   UpdateMath(output);
 }
 
+// Add intellisense assistance
 function inputIntellisense(keyCode, equation)
 {
   let input = document.getElementById("input");
   let cursorPosition = input.selectionEnd;
   console.log(cursorPosition);
 
-  let bracketDepth = 0;
+  // Since intellisense is focussed aroudn cursor, build left and right halves
+  //  independently then merge 
   let leftOfCursor = equation.substring(0, cursorPosition);
   let rightOfCursor = equation.substring(cursorPosition);
+  
+  // Interpret relative 'depth' into nested brackets
+  let bracketDepth = 0;
   bracketDepth = (leftOfCursor.match(/\[/g) || []).length - (leftOfCursor.match(/]/g) || []).length;
 
+  // More opened than closed brackets
   if ((equation.match(/\[/g) || []).length > (equation.match(/]/g) || []).length)
   {
     rightOfCursor = ']'+rightOfCursor;
   }
+  // Add tabbing relative to 'depth' on newline
   if (keyCode == '13' && bracketDepth > 1)
   {
     for (i = 1; i < bracketDepth; i++)
@@ -42,14 +56,18 @@ function inputIntellisense(keyCode, equation)
     }
   }
   
+  // Reflow input
   input.value = leftOfCursor + rightOfCursor;
+  // Reposition cursor
   input.selectionEnd = cursorPosition;
   return leftOfCursor + rightOfCursor;
 }
 
+// Divide input into interpretable 'words'
 function splitEquation(equation)
 {
   let output;
+  // Isolate <,> <\n> <[> <]> and <->
   output = equation.replace(/,/g, " , ");
   output = output.replace(/\n/g, " \n ");
   output = output.replace(/\[/g, " [ ");
@@ -59,6 +77,7 @@ function splitEquation(equation)
   return output.split(" ");
 }
 
+// Convert 'words' into Tex syntax
 function interpretWord(word)
 {
   let output = "";
@@ -75,6 +94,7 @@ function interpretWord(word)
         break;
 
       // Separate elements into different columns
+      //  fails if outside of matrix
       case ",":
         output += "&";
         break;
@@ -86,26 +106,29 @@ function interpretWord(word)
 
       // Add greek lowercase phi
       case "phi":
+      case "Phi":
       case "PHI":
         output += "\\varphi";
         break;
       // Add logician's negation
       case "not":
+      case "Not":
       case "NOT":
         output += "\\neg";
         break;
       
       // Ignore tabs
       case "\t":
-      // Ignore empty words
+      // Ignore empty words or spaces
       case "":
         break;
 
-      // Non syntactic words
+      // Non syntactic words are appended as is
       default:
         output += word;
         break;
     }
+  // Separate each syntactic unit with a space
   output += " ";
   return output;
 }
