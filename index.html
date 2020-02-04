@@ -18,56 +18,58 @@
       
       <!-- Look into here for help: https://github.com/kbroman/simple_site/tree/gh-pages/pages -->
 
-      <div class="row pt-1">
-        <!-- Maintain a fairly consitent side banner width -->
-        <div class="col-12 col-lg-3 col-md-4" id="sideBanner">
-          <div class="card">
-            <div class="card-body">
-              <p class="card-text">
-                hi
-              </p>
+      <div class="container-fluid pl-0">
+        <div class="row pt-1">
+          <!-- Maintain a fairly consitent side banner width -->
+          <div class="col-12 col-lg-3 col-md-4" id="sideBanner">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">
+                  hi
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Main content should always be large and highly visible -->
-        <div class="col" id="content">
+          <!-- Main content should always be large and highly visible -->
+          <div class="col" id="content">
 
-          <div class="container">
-            <!-- User's input area -->
-            <textarea id="input" placeholder="Type here" class="col-12" onkeyup="keyUpEvent(event, this.value)"></textarea>
-          
-            <!-- Helper legends for syntax -->
-            <div class="row" id="legendContainer">
-              <div class="card text-center col-md">
-                <div class="card-body px-0 py-1">
-                  <p class="card-text">
-                    <code>[</code> and <code>]</code> to start or end a matrix bracket <br>
-                    <code>(</code> and <code>)</code> to start or stop subscripts <br>
-                    <code>,</code> to separate words in a matrix <br>
-                    <code>not</code> followed by a space to place a &not; symbol <br>
-                  </p>
-                  <!-- Button to show modal with an example? -->
-                  <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
+            <div class="container">
+              <!-- User's input area -->
+              <textarea id="input" placeholder="Type here" class="col-12" onkeyup="keyUpEvent(event, this.value)"></textarea>
+            
+              <!-- Helper legends for syntax -->
+              <div class="row" id="legendContainer">
+                <div class="card text-center col-md">
+                  <div class="card-body px-0 py-1">
+                    <p class="card-text">
+                      <code>[</code> and <code>]</code> to start or end a matrix bracket <br>
+                      <code>(</code> and <code>)</code> to start or stop subscripts <br>
+                      <code>,</code> to separate words in a matrix <br>
+                      <code>not</code> followed by a space to place a &not; symbol <br>
+                    </p>
+                    <!-- Button to show modal with an example? -->
+                    <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
+                  </div>
+                </div>
+                <div class="card text-center col-md">
+                  <div class="card-body px-0 py-1">
+                    <p class="card-text">
+                      <code>{</code> and <code>}</code> to start or end braces <br>
+                      <code><</code> and <code>></code> to start or end corner brackets <br>
+                      <kbd>Enter</kbd> or <code>;</code> to go down a line <br>
+                      <code>phi</code> followed by a space to place a &phi; symbol <br>
+                    </p>
+                    <!-- Button to show modal with an example? -->
+                    <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
+                  </div>
                 </div>
               </div>
-              <div class="card text-center col-md">
-                <div class="card-body px-0 py-1">
-                  <p class="card-text">
-                    <code>{</code> and <code>}</code> to start or end braces <br>
-                    <code><</code> and <code>></code> to start or end corner brackets <br>
-                    <kbd>Enter</kbd> or <code>;</code> to go down a line <br>
-                    <code>phi</code> followed by a space to place a &phi; symbol <br>
-                  </p>
-                  <!-- Button to show modal with an example? -->
-                  <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
-                </div>
-              </div>
+
+              <!-- The script to be interpreted as Tex -->
+              <script type="math/tex; mode=display" id="equation"></script>
+
             </div>
-
-            <!-- The script to be interpreted as Tex -->
-            <script type="math/tex; mode=display" id="equation"></script>
-
           </div>
         </div>
       </div>
