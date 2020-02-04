@@ -1,3 +1,8 @@
+// Enum and global to interpret matrix seperator
+var matrixMode = 0;
+// abs(matrixMode) : Num of nested matrices
+// matrixMode > 0 : In matrix interpretation, convert separators to <&>
+
 // To be run on each key press
 function keyUpEvent(event, equation)
 {
@@ -11,6 +16,7 @@ function keyUpEvent(event, equation)
   // Store between sessions
   sessionStorage.setItem("input", equation);
 
+  matrixMode = 0;
   // Split each 'word' so it can be syntactically interpretted
   let separated = splitEquation(equation);
   separated.forEach(word => 
@@ -59,6 +65,12 @@ function inputIntellisense(keyCode, equation)
     rightOfCursor = '}'+rightOfCursor;
   }
 
+  // More opened than closed corner brackets
+  if ((equation.match(/\</g) || []).length > (equation.match(/\>/g) || []).length)
+  {
+    rightOfCursor = '>'+rightOfCursor;
+  }
+
   // Add tabbing relative to 'depth' on newline
   if (keyCode == '13' && bracketDepth > 1)
   {
@@ -80,7 +92,7 @@ function inputIntellisense(keyCode, equation)
 function splitEquation(equation)
 {
   let output;
-  // Isolate <,> <\n> <[> <]> <(> <)> <{> <}> and <->
+  // Isolate <,> <\n> <[> <]> <(> <)> <{> <}> '<' '>' and <->
   output = equation.replace(/,/g, " , ");
   output = output.replace(/\n/g, " \n ");
   output = output.replace(/\[/g, " [ ");
@@ -90,6 +102,8 @@ function splitEquation(equation)
   output = output.replace(/\)/g, " ) ");
   output = output.replace(/\{/g, " { ");
   output = output.replace(/\}/g, " } ");
+  output = output.replace(/\</g, " < ");
+  output = output.replace(/\>/g, " > ");
 
   return output.split(" ");
 }
@@ -103,10 +117,19 @@ function interpretWord(word)
     {
       // Begin matrix
       case "[":
+        // If in protected mode, switch
+        if (matrixMode < 0)
+        {
+          matrixMode *= -1;
+        }
+        // 'Depth' increase
+        matrixMode++;
         output += "\\begin{bmatrix}";
         break;
       // End matrix
       case "]":
+        // 'Depth' decrease
+        matrixMode--;
         output += "\\end{bmatrix}";
         break;
 
@@ -121,17 +144,54 @@ function interpretWord(word)
 
       // Begin braces
       case "{":
+        // If in matrix mode, switch to protected
+        if (matrixMode > 0)
+        {
+          matrixMode *= -1;
+        }
         output += "\\left\\{";
         break;
       // End braces
       case "}":
+        // If in protected mode, switch
+        if (matrixMode < 0)
+        {
+          matrixMode *= -1;
+        }
         output += "\\right\\}";
         break;
 
-      // Separate elements into different columns
-      //  fails if outside of matrix
+      // Begin corner brackets
+      case "<":
+        // If in matrix mode, switch to protected
+        if (matrixMode > 0)
+        {
+          matrixMode *= -1;
+        }
+        output += "\\left<";
+        break;
+      // End corner brackets
+      case ">":
+        // If in protected mode, switch
+        if (matrixMode < 0)
+        {
+          matrixMode *= -1;
+        }
+        output += "\\right>";
+        break;
+
+      // Seperator
       case ",":
-        output += "&";
+        // If in matrix mode, act as separator
+        if (matrixMode > 0)
+        {
+          output += "&";
+        }
+        // If outside of matrix or in protected mode, act as comma
+        else
+        {
+          output += word;
+        }
         break;
       // Separate elements into different rows
       case ";":
