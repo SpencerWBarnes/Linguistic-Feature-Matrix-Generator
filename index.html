@@ -48,10 +48,11 @@
 
       <!-- Load previous values into input and equation output -->
       <script>
-        let equation = sessionStorage.getItem("equation");
-        document.getElementById("equation").innerText = equation
-        let input = sessionStorage.getItem("input");
-        document.getElementById("input").value = input;
+        document.getElementById("equation").innerText = sessionStorage.getItem("equation");
+        document.getElementById("input").value = sessionStorage.getItem("input");
+
+        // Adjust input window height if needed
+        autosize(document.getElementById("input"));
       </script>
 
       <!-- End matrix generator code -->
