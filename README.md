@@ -29,6 +29,9 @@
     </div>
   </div>
 
+  <!-- The script to be interpreted as Tex -->
+  <script type="math/tex; mode=display" id="equation"></script>
+
 </div>
 
 <!-- Load previous values into input and equation output -->
