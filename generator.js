@@ -215,6 +215,13 @@ function interpretWord(word)
       case "NOT":
         output += "\\neg";
         break;
+
+      // Add empty set symbol
+      case "empty":
+      case "Empty":
+      case "EMPTY":
+        output += "\\emptyset"
+        break;
       
       // Ignore tabs
       case "\t":
