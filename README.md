@@ -1,7 +1,5 @@
 <!-- Begin matrix generator code -->
 
-<!-- Generator code -->
-<script src="generator.js"></script>
 <!-- bootstrap -->
 <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
 
