@@ -1,80 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title> 
-            Feature Matrix Builder
-        </title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title> 
+          Feature Matrix Builder
+      </title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Get MathJax and autosize functionality -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-        
-        <!-- Generator code -->
-        <script src="generator.js"></script>
-        <!-- bootstrap -->
-        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+      <!-- Get MathJax and autosize functionality -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+      
+      <!-- Generator code -->
+      <script src="generator.js"></script>
+      <!-- bootstrap -->
+      <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+      
+      <!-- Jekyll -->
+      <link rel="stylesheet" href="/Linguistic-Feature-Matrix-Generator/assets/css/style.css?v=d6d15ef147e47af0b67052bb824b3a2d92bdeed9">
     </head>
     <body>
       
       <!-- Look into here for help: https://github.com/kbroman/simple_site/tree/gh-pages/pages -->
 
-      <div class="container-fluid">
-        <div class="row">
-          <!-- Maintain a fairly consitent side banner width -->
-          <div class="col-12 col-lg-3 col-md-4 p-3 px-0 border-top border-secondary" id="sideBanner">
-            <div class="card text-white bg-info">
-              <div class="card-body">
-                <p class="card-text">
-                  hi
-                </p>
+      <!-- Side banner and main content -->
+      <div class="row">
+        <!-- Side banner -->
+        <header class="col-12 col-lg-3 col-md-4">
+          <h1><a href="https://spencerwbarnes.github.io/Linguistic-Feature-Matrix-Generator/">Feature Matrix Generator</a></h1>
+    
+          <p>This is tool to create feature matrices for words. This is a useful for defining the behaviors of words either semantically or syntactically.</p>     
+          <p class="view"><a href="https://github.com/SpencerWBarnes/Linguistic-Feature-Matrix-Generator">View the Project on GitHub <small>SpencerWBarnes/Linguistic-Feature-Matrix-Generator</small></a></p>
+    
+        </header>
+
+        <!-- Main content -->
+        <section class="col">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="container">
+                <!-- User's input area -->
+                <textarea id="input" placeholder="Type here" class="col-12" onkeyup="keyUpEvent(event, this.value)"></textarea>
+              
+                <!-- Helper legends for syntax -->
+                <div class="row" id="legendContainer">
+                  <div class="card m-1 bg-light text-center col-md">
+                    <div class="card-body px-0 py-1">
+                      <p class="card-text">
+                        <code>[</code> and <code>]</code> to start or end a matrix bracket <br>
+                        <code>(</code> and <code>)</code> to start or stop subscripts <br>
+                        <code>not</code> followed by a space to place: &not; <br>
+                        <code>empty</code> followed by a space to place: &empty; <br>
+                        <code>phi</code> followed by a space to place: &phi; <br>
+                      </p>
+                      <!-- Button to show modal with an example? -->
+                      <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
+                    </div>
+                  </div>
+                  <div class="card m-1 bg-light text-center col-md">
+                    <div class="card-body px-0 py-1">
+                      <p class="card-text">
+                        <code>{</code> and <code>}</code> to start or end braces <br>
+                        <code><</code> and <code>></code> to start or end corner brackets <br>
+                        <kbd>Enter</kbd> or <code>;</code> to go down a line <br>
+                        <code>,</code> to separate words in a matrix <br>
+                      </p>
+                      <!-- Button to show modal with an example? -->
+                      <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- The script to be interpreted as Tex -->
+                <script type="math/tex; mode=display" id="equation"></script>
+                
               </div>
             </div>
           </div>
+        </section>
+      </div>
 
-          <!-- Main content should always be large and highly visible -->
-          <div class="col pt-3 border-top border-secondary" id="content">
-
-            <div class="container">
-              <!-- User's input area -->
-              <textarea id="input" placeholder="Type here" class="col-12" onkeyup="keyUpEvent(event, this.value)"></textarea>
-            
-              <!-- Helper legends for syntax -->
-              <div class="row" id="legendContainer">
-                <div class="card m-1 bg-light text-center col-md">
-                  <div class="card-body px-0 py-1">
-                    <p class="card-text">
-                      <code>[</code> and <code>]</code> to start or end a matrix bracket <br>
-                      <code>(</code> and <code>)</code> to start or stop subscripts <br>
-                      <code>not</code> followed by a space to place: &not; <br>
-                      <code>empty</code> followed by a space to place: &empty; <br>
-                      <code>phi</code> followed by a space to place: &phi; <br>
-                    </p>
-                    <!-- Button to show modal with an example? -->
-                    <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
-                  </div>
-                </div>
-                <div class="card m-1 bg-light text-center col-md">
-                  <div class="card-body px-0 py-1">
-                    <p class="card-text">
-                      <code>{</code> and <code>}</code> to start or end braces <br>
-                      <code><</code> and <code>></code> to start or end corner brackets <br>
-                      <kbd>Enter</kbd> or <code>;</code> to go down a line <br>
-                      <code>,</code> to separate words in a matrix <br>
-                    </p>
-                    <!-- Button to show modal with an example? -->
-                    <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
-                  </div>
-                </div>
-              </div>
-
-              <!-- The script to be interpreted as Tex -->
-              <script type="math/tex; mode=display" id="equation"></script>
-
-            </div>
-          </div>
-        </div>
+      <!-- Footer -->
+      <div class="row">
+        <footer class="row container">
+          <p>This project is maintained by <a href="https://github.com/SpencerWBarnes">SpencerWBarnes</a></p>    
+          <p><small>Hosted on GitHub Pages — Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        </footer>
       </div>
 
       <!-- Load previous values into input and equation output -->
