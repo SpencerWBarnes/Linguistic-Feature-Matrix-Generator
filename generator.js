@@ -149,7 +149,8 @@ function interpretWord(word)
         {
           matrixMode *= -1;
         }
-        output += "\\left\\{";
+        output += "\\left\\{ ";
+        output += "\\begin{matrix}";
         break;
       // End braces
       case "}":
@@ -158,6 +159,7 @@ function interpretWord(word)
         {
           matrixMode *= -1;
         }
+        output += "\\end{matrix} ";
         output += "\\right\\}";
         break;
 
@@ -168,7 +170,8 @@ function interpretWord(word)
         {
           matrixMode *= -1;
         }
-        output += "\\left<";
+        output += "\\left< ";
+        output += "\\begin{matrix}";
         break;
       // End corner brackets
       case ">":
@@ -177,6 +180,7 @@ function interpretWord(word)
         {
           matrixMode *= -1;
         }
+        output += "\\end{matrix} ";
         output += "\\right>";
         break;
 
