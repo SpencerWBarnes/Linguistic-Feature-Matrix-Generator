@@ -21,10 +21,10 @@
       <!-- Look into here for help: https://github.com/kbroman/simple_site/tree/gh-pages/pages -->
 
       <div class="container-fluid">
-        <div class="row pt-1">
+        <div class="row">
           <!-- Maintain a fairly consitent side banner width -->
-          <div class="col-12 col-lg-3 col-md-4" id="sideBanner">
-            <div class="card">
+          <div class="col-12 col-lg-3 col-md-4 p-3 px-0 border-top border-secondary" id="sideBanner">
+            <div class="card text-white bg-info">
               <div class="card-body">
                 <p class="card-text">
                   hi
@@ -34,7 +34,7 @@
           </div>
 
           <!-- Main content should always be large and highly visible -->
-          <div class="col" id="content">
+          <div class="col pt-3 border-top border-secondary" id="content">
 
             <div class="container">
               <!-- User's input area -->
@@ -42,26 +42,26 @@
             
               <!-- Helper legends for syntax -->
               <div class="row" id="legendContainer">
-                <div class="card text-center col-md">
+                <div class="card m-1 bg-light text-center col-md">
                   <div class="card-body px-0 py-1">
                     <p class="card-text">
                       <code>[</code> and <code>]</code> to start or end a matrix bracket <br>
                       <code>(</code> and <code>)</code> to start or stop subscripts <br>
-                      <code>,</code> to separate words in a matrix <br>
-                      <code>not</code> followed by a space to place a &not; symbol <br>
-                      <code>empty</code> followed by a space to place a &empty; symbol <br>
+                      <code>not</code> followed by a space to place: &not; <br>
+                      <code>empty</code> followed by a space to place: &empty; <br>
+                      <code>phi</code> followed by a space to place: &phi; <br>
                     </p>
                     <!-- Button to show modal with an example? -->
                     <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
                   </div>
                 </div>
-                <div class="card text-center col-md">
+                <div class="card m-1 bg-light text-center col-md">
                   <div class="card-body px-0 py-1">
                     <p class="card-text">
                       <code>{</code> and <code>}</code> to start or end braces <br>
                       <code><</code> and <code>></code> to start or end corner brackets <br>
                       <kbd>Enter</kbd> or <code>;</code> to go down a line <br>
-                      <code>phi</code> followed by a space to place a &phi; symbol <br>
+                      <code>,</code> to separate words in a matrix <br>
                     </p>
                     <!-- Button to show modal with an example? -->
                     <!-- <button class="btn btn-secondary align-center" onclick="example()">Examples</button> -->
