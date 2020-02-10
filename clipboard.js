@@ -41,3 +41,18 @@ function copyTextToClipboard(text) {
     console.error('Async: Could not copy text: ', err);
   });
 }
+
+function getWordCompatibleEquation()
+{
+  let equationFrame = document.getElementById("equation-Frame");
+  if (equationFrame == null)
+  {
+    return;
+  }
+
+  // Necessary to tell Word how to interpret data, ref: https://tex.stackexchange.com/questions/25223/embed-latex-math-equations-into-microsoft-word 
+  let wordCompatibleEquation = "<?xml version=\"1.0\"?>";
+  wordCompatibleEquation += equationFrame.getAttribute("data-mathml");
+
+  copyTextToClipboard(wordCompatibleEquation);
+}
