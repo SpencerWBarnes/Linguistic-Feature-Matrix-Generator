@@ -149,8 +149,7 @@ function interpretWord(word)
         {
           matrixMode *= -1;
         }
-        output += "\\left\\{ ";
-        output += "\\begin{matrix}";
+        output += "\\begin{Bmatrix}";
         break;
       // End braces
       case "}":
@@ -159,8 +158,7 @@ function interpretWord(word)
         {
           matrixMode *= -1;
         }
-        output += "\\end{matrix} ";
-        output += "\\right\\}";
+        output += "\\end{Bmatrix} ";
         break;
 
       // Begin corner brackets
