@@ -95,6 +95,7 @@ function splitEquation(equation)
   // Isolate <,> <\n> <[> <]> <(> <)> <{> <}> '<' '>' and <->
   output = equation.replace(/,/g, " , ");
   output = output.replace(/\n/g, " \n ");
+  output = output.replace(/\t/g, " \t ");
   output = output.replace(/\[/g, " [ ");
   output = output.replace(/]/g, " ] ");
   output = output.replace(/-/g, " - ");

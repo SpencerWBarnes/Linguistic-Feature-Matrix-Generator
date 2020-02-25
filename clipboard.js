@@ -54,6 +54,7 @@ function getWordCompatibleEquation()
   let wordCompatibleEquation = "<?xml version=\"1.0\"?>";
   wordCompatibleEquation += equationFrame.getAttribute("data-mathml");
 
+  // Render braces as key word
   wordCompatibleEquation = wordCompatibleEquation.replace(/\{/g, "\\left{");
   wordCompatibleEquation = wordCompatibleEquation.replace(/\}/g, "\\right}");
   
